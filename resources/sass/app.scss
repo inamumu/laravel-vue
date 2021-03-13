@@ -3,3 +3,12 @@
 
 /* 共通
 -----------------------------------*/
+.main {
+  width: 100%;
+  padding: 20px 0 40px;
+  .main_inner {
+    max-width: $layout-width;
+    margin: 0 auto;
+    display: flex;
+  }
+}
