@@ -108,9 +108,11 @@ export default {
       display: flex;
       list-style: none;
       li {
+        width: 50%;
         padding: 10px;
         border: 2px solid #eee;
         border-radius: 5px;
+        text-align: center;
         cursor: pointer;
         &:nth-child(2) {
           margin-left: 2px;
