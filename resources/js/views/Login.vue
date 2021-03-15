@@ -9,31 +9,31 @@
           <li @click="tab = 1" :class="{'js-active': tab === 1}">Login</li>
           <li @click="tab = 2" :class="{'js-active': tab === 2}">Register</li>
         </ul>
-        <form class="panel" v-show="tab === 1" @submit.prevent="Login">
+        <form class="panel" v-show="tab === 1" @submit.prevent="login">
           <div class="text_block">
             <label for="email">email</label>
-            <input type="email" v-model="loginForm.email" id="email" name="email" placeholder="example@example.com">
+            <input type="email" v-model="loginForm.email" id="loginEmail" name="email" placeholder="example@example.com">
           </div>
           <div class="text_block">
             <label for="password">password</label>
-            <input type="password" v-model="loginForm.password" id="password" name="password">
+            <input type="password" v-model="loginForm.password" id="loginPassword" name="password">
           </div>
           <div class="submit">
             <input type="submit" value="Login">
           </div>
         </form>
-        <form class="panel" v-show="tab === 2" @submit.prevent="Register">
+        <form class="panel" v-show="tab === 2" @submit.prevent="register">
           <div class="text_block">
             <label for="username">name</label>
             <input type="text" v-model="registerForm.name" id="username" placeholder="inamumu">
           </div>
           <div class="text_block">
             <label for="email">email</label>
-            <input type="email" v-model="registerForm.email" id="email" placeholder="example@example.com">
+            <input type="email" v-model="registerForm.email" id="registerEmail" placeholder="example@example.com">
           </div>
           <div class="text_block">
             <label for="password">password</label>
-            <input type="password" v-model="registerForm.password" id="password">
+            <input type="password" v-model="registerForm.password" id="registerPassword">
           </div>
           <div class="text_block">
             <label for="password_confirmation">password (confirm)</label>
@@ -66,12 +66,16 @@ export default {
     }
   },
   methods: {
-    login () {
-      console.log(this.loginForm)
+    async register () {
+      // authストアのresigterアクションを呼び出す
+      await this.$store.dispatch('auth/register', this.registerForm);
+      this.$router.push('/');
     },
-    register () {
-      console.log(this.registerForm)
-    }
+    // authストアのloginアクションを呼び出す
+    async login () {
+      await this.$store.dispatch('auth/login', this.loginForm);
+      this.$router.push('/');
+    },
   }
 }
 </script>

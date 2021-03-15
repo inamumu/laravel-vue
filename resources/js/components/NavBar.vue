@@ -8,6 +8,7 @@
     <div class="global_nav">
       <ul>
         <li><router-link to="/login">Login / Register</router-link></li>
+        <li><span @click="logout">Logout</span></li>
       </ul>
     </div>
     <div class="js-gray" v-show="active" @click="toggle"></div>
@@ -24,6 +25,10 @@ export default {
   methods: {
     toggle() {
       this.active = !this.active;
+    },
+    async logout() {
+      await this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
     }
   }
 }
@@ -82,11 +87,12 @@ export default {
     transition: .6s;
     ul {
       li {
-        a {
+        a, span {
           position: relative;
           display: block;
           padding: 10px;
           color: $text-color;
+          cursor: pointer;
           &::before, &::after {
             position: absolute;
             content: "";
