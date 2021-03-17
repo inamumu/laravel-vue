@@ -7,8 +7,10 @@
     </div>
     <div class="global_nav">
       <ul>
-        <li><router-link to="/login">Login / Register</router-link></li>
-        <li><span @click="logout">Logout</span></li>
+        
+        <li v-if="isLogin"><span>{{username}}</span></li>
+        <li v-if="isLogin"><span @click="logout">Logout</span></li>
+        <li v-else><router-link to="/login">Login / Register</router-link></li>
       </ul>
     </div>
     <div class="js-gray" v-show="active" @click="toggle"></div>
@@ -20,6 +22,14 @@ export default {
   data() {
     return {
       active: false,
+    }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters['auth/check'];
+    },
+    username() {
+      return this.$store.getters['auth/username'];
     }
   },
   methods: {
